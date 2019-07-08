@@ -52,19 +52,19 @@ string ProcessParser::getCmd(string pid){
     return cmd;
 }
 /**
- * returns a string holding the value of the size of the vm
+ * Get the virtual memory size 
  */
 string ProcessParser::getVmSize(string pid){
     string line =  "";
     string name = "VmData";
     float result = 0.0f;
-    //We get the status path from the pid path
+    //status path from the pid path
     ifstream stream = Util::getStream(Path::basePath() + pid + Path::statusPath());
     
     while(getline(stream, line)){
         if(line.find(name) != string::npos){
             istringstream buf(line);
-            //We need a input stream iterator to acess the values in vm
+            //input stream iterator to acess the values in vm
             istream_iterator<string> beg(buf), end;
             vector<string> values(beg, end);
             result = (stof(values[1])/float(1024));
@@ -121,13 +121,13 @@ string ProcessParser::getProcUser(string pid){
     string line =  "";
     string name = "Uid";
     string result = "";
-    //We get the status path from the pid path
+    //status path from the pid path
     ifstream stream = Util::getStream(Path::basePath() + pid + Path::statusPath());
     
     while(getline(stream, line)){
         if(line.find(name) != std::string::npos){
             istringstream buf(line);
-            //We need a input stream iterator to acess the values in vm
+            //input stream iterator to acess the values in vm
             istream_iterator<string> beg(buf), end;
             vector<string> values(beg, end);
             result = values[1];
