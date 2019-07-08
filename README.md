@@ -3,8 +3,10 @@ Udacity process monitor project: The main goal of the project is to buils a proc
 
 # running the project
 -------------------
-for compiling the project
+compiling the project
+
 `$ g++ -std='c++17' main.cpp -lncurses`
 
-for running the project
+running the project
+
 `$ ./a.out`
