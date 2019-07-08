@@ -13,6 +13,10 @@ So used C++ programming language to do the parsing of process files and display 
 ## ncurses
 ncurses is a dedicated API for writing terminal independent text outputs. It refreshes the terminal data every second and it also creates percentage bars and seperate windows within teminal
 
+## installing ncurses package
+-------------
+`sudo apt-get install libncurses5-dev libncursesw5-dev`
+
 ## running the project
 -------------
 compiling the project
