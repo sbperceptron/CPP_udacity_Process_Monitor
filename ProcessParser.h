@@ -73,6 +73,10 @@ string ProcessParser::getVmSize(string pid){
     }
     return to_string(result);
 }
+
+/** 
+* GET the CPU percent usage for a process
+*/
 string ProcessParser::getCpuPercent(string pid){
     string line;
     float result;
@@ -94,6 +98,9 @@ string ProcessParser::getCpuPercent(string pid){
     return to_string(result);
 }
 
+/** 
+* GET the Process up time for a process
+*/
 std::string ProcessParser::getProcUpTime(string pid){
     string value;
     string line;
@@ -105,6 +112,9 @@ std::string ProcessParser::getProcUpTime(string pid){
     return to_string(float(stof(values[13]))/sysconf(_SC_CLK_TCK));
 }
 
+/** 
+* GET the System up time
+*/
 long int ProcessParser::getSysUpTime(){
     string line;
     ifstream stream = Util::getStream(Path::basePath() + Path::upTimePath());
@@ -117,6 +127,9 @@ long int ProcessParser::getSysUpTime(){
     return stoi(values[0]);
 }
 
+/** 
+* GET the Process user for a process
+*/
 string ProcessParser::getProcUser(string pid){
     string line =  "";
     string name = "Uid";
@@ -145,6 +158,7 @@ string ProcessParser::getProcUser(string pid){
         }
     }
 }
+
 bool allDigit(string str){
     for(int i = 0; i < str.size(); i++){
         if(!isdigit(str[i]))return false;
@@ -152,6 +166,9 @@ bool allDigit(string str){
     return true;
 }
 
+/** 
+* GET all the running processes ids 
+*/
 vector<string> ProcessParser::getPidList(){
     DIR* dir;
     vector<string>container;
@@ -173,6 +190,9 @@ vector<string> ProcessParser::getPidList(){
     return container;
 }
 
+/** 
+* GET Number of cpu cores on the system
+*/
 int ProcessParser::getNumberOfCpuCores(){
     int result = 0;
     string line = "";
@@ -188,6 +208,10 @@ int ProcessParser::getNumberOfCpuCores(){
     }
     return result;
 }
+
+/** 
+* GET the System CPU percent usage for a core
+*/
 vector<string> ProcessParser::getSysCpuPercent(string coreNumber){
     string line = "";
     string name = "cpu" + coreNumber;
@@ -203,6 +227,9 @@ vector<string> ProcessParser::getSysCpuPercent(string coreNumber){
     return (vector<string>());
 }
 
+/** 
+* GET System Active CPU time
+*/
 float getSysActiveCpuTime(vector<string> values)
 {
     return (stof(values[S_USER]) +
@@ -215,11 +242,17 @@ float getSysActiveCpuTime(vector<string> values)
             stof(values[S_GUEST_NICE]));
 }
 
+/** 
+* GET System Idle CPU time
+*/
 float getSysIdleCpuTime(vector<string>values)
 {
     return (stof(values[S_IDLE]) + stof(values[S_IOWAIT]));
 }
 
+/** 
+* Print the CPU stats caliculated so far
+*/
 std::string ProcessParser::PrintCpuStats(std::vector<std::string> values1, std::vector<std::string> values2){
     /**
      * CPU stats are time-dependent
@@ -231,6 +264,10 @@ std::string ProcessParser::PrintCpuStats(std::vector<std::string> values1, std::
     float result = 1000.0*(activeTime / totalTime);
     return to_string(result);
 }
+
+/** 
+* GET the System RAM percent usage
+*/
 
 float ProcessParser::getSysRamPercent(){
     float sysRamPercent = 0.0f;
@@ -268,6 +305,9 @@ float ProcessParser::getSysRamPercent(){
     return (100*(1-(freeMem/(totalMem-buffers))));
 }
 
+/** 
+* GET System Kernel version
+*/
 string ProcessParser::getSysKernelVersion(){
     string line = "";
     string name = "Linux";
@@ -283,6 +323,9 @@ string ProcessParser::getSysKernelVersion(){
     return name;
 }
 
+/** 
+* GET OS Name
+*/
 string ProcessParser::getOSName(){
     ifstream stream = Util::getStream("/etc/os-release");
     string OSName = "";
@@ -296,6 +339,10 @@ string ProcessParser::getOSName(){
     }
     return OSName;
 }
+
+/** 
+* GET Total number of threads
+*/
 int ProcessParser::getTotalThreads(){
     string name = "Threads";
     string line= "";
@@ -314,6 +361,9 @@ int ProcessParser::getTotalThreads(){
     return totalThreads;
 }
 
+/** 
+* GET Total number of processes
+*/
 int ProcessParser::getTotalNumberOfProcesses(){
     string name = "processes";
     string line= "";
@@ -330,6 +380,9 @@ int ProcessParser::getTotalNumberOfProcesses(){
     return totalProcesses;
 }
 
+/** 
+* GET Number of Running Processes
+*/
 int ProcessParser::getNumberOfRunningProcesses(){
     string name = "procs_running";
     string line= "";
