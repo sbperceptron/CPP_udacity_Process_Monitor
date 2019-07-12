@@ -29,4 +29,4 @@ running the project
 
 ## Result of System Monitor:
 
-![](https://github.com/sbperceptron/CPP_udacity_Process_Monitor/blob/master/system_monitor.png)
+![](https://github.com/sbperceptron/CPP_udacity_Process_Monitor/blob/master/system_monitor1.png)
